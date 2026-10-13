@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nebula Match: Cosmic Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="Tic-Toc-Toe.css">
+</head>
+<body>
+  <!-- Ambient Space Backgrounds -->
+  <div class="nebula-bg nebula-1"></div>
+  <div class="nebula-bg nebula-2"></div>
+  <div class="stars-layer"></div>
+
+  <main class="game-container">
+    <header class="header">
+      <h1 class="title">NEBULA MATCH</h1>
+      <p class="subtitle">Cosmic Tic-Tac-Toe</p>
+    </header>
+
+    <!-- Symbol Selection Bar -->
+    <div class="avatar-picker-container">
+      <div class="picker-group">
+        <label for="symbol-x">Player X Avatar</label>
+        <select id="symbol-x" class="symbol-select js-symbol-x"></select>
+      </div>
+      <div class="picker-divider">VS</div>
+      <div class="picker-group">
+        <label for="symbol-o">Player O Avatar</label>
+        <select id="symbol-o" class="symbol-select js-symbol-o"></select>
+      </div>
+    </div>
+
+    <!-- Top Bar with Scores & Sound Toggle -->
+    <div class="top-bar">
+      <div class="score-board">
+        <div class="score-card score-x">
+          <span class="label js-label-x">PLAYER X</span>
+          <span class="value js-score-x">0</span>
+        </div>
+        <div class="score-card score-draws">
+          <span class="label">DRAWS</span>
+          <span class="value js-score-draws">0</span>
+        </div>
+        <div class="score-card score-o">
+          <span class="label js-label-o">PLAYER O</span>
+          <span class="value js-score-o">0</span>
+        </div>
+      </div>
+      
+      <button class="sound-toggle js-sound-toggle" aria-label="Toggle Sound">
+        <span class="js-sound-label">🔊</span>
+      </button>
+    </div>
+
+    <!-- Turn & Victory Status -->
+    <div class="status js-status">Player X's Turn</div>
+
+    <!-- 3x3 Grid -->
+    <div class="board js-board">
+      <button class="cell" data-index="0" aria-label="Grid square 1"></button>
+      <button class="cell" data-index="1" aria-label="Grid square 2"></button>
+      <button class="cell" data-index="2" aria-label="Grid square 3"></button>
+      <button class="cell" data-index="3" aria-label="Grid square 4"></button>
+      <button class="cell" data-index="4" aria-label="Grid square 5"></button>
+      <button class="cell" data-index="5" aria-label="Grid square 6"></button>
+      <button class="cell" data-index="6" aria-label="Grid square 7"></button>
+      <button class="cell" data-index="7" aria-label="Grid square 8"></button>
+      <button class="cell" data-index="8" aria-label="Grid square 9"></button>
+    </div>
+
+    <!-- Control Buttons -->
+    <div class="controls-container">
+      <button class="btn reset-game-btn js-reset-button">Restart Match</button>
+      <button class="btn clear-score-btn js-clear-score-button">Clear Scores</button>
+    </div>
+  </main>
+
+  <script src="Tic-Toc-Toe.js"></script>
+</body>
+</html>
