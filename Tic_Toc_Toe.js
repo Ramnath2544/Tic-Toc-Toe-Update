@@ -5,6 +5,8 @@ const resetButton = document.querySelector('.js-reset-button');
 const clearScoreButton = document.querySelector('.js-clear-score-button');
 const soundToggleBtn = document.querySelector('.js-sound-toggle');
 const soundLabel = document.querySelector('.js-sound-label');
+const volumeSlider = document.querySelector('.js-volume-slider');
+const volumeValue = document.querySelector('.js-volume-value');
 
 const symbolXSelect = document.querySelector('.js-symbol-x');
 const symbolOSelect = document.querySelector('.js-symbol-o');
@@ -36,6 +38,7 @@ let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X'; // 'X' or 'O'
 let isGameActive = true;
 let soundOn = localStorage.getItem('nebulaRpsSound') !== 'off';
+let volume = parseInt(localStorage.getItem('nebulaVolume')) || 70; // Default 70%
 
 let score = JSON.parse(localStorage.getItem('ticTacToeScore')) || {
   xWins: 0,
@@ -67,6 +70,7 @@ function playSynthesizedSound(type) {
   if (!audioCtx) return;
 
   const now = audioCtx.currentTime;
+  const volumeMultiplier = volume / 100; // Convert percentage to 0-1 range
 
   if (type === 'moveX') {
     const osc = audioCtx.createOscillator();
@@ -74,7 +78,7 @@ function playSynthesizedSound(type) {
     osc.type = 'sine';
     osc.frequency.setValueAtTime(520, now);
     osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
-    gain.gain.setValueAtTime(0.12, now);
+    gain.gain.setValueAtTime(0.25 * volumeMultiplier, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
@@ -86,7 +90,7 @@ function playSynthesizedSound(type) {
     osc.type = 'triangle';
     osc.frequency.setValueAtTime(320, now);
     osc.frequency.exponentialRampToValueAtTime(220, now + 0.1);
-    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.setValueAtTime(0.3 * volumeMultiplier, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
@@ -99,7 +103,7 @@ function playSynthesizedSound(type) {
       const startTime = now + idx * 0.08;
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, startTime);
-      gain.gain.setValueAtTime(0.12, startTime);
+      gain.gain.setValueAtTime(0.28 * volumeMultiplier, startTime);
       gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.2);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -113,7 +117,7 @@ function playSynthesizedSound(type) {
       const startTime = now + idx * 0.1;
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(freq, startTime);
-      gain.gain.setValueAtTime(0.08, startTime);
+      gain.gain.setValueAtTime(0.18 * volumeMultiplier, startTime);
       gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.18);
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -126,7 +130,7 @@ function playSynthesizedSound(type) {
     osc.type = 'sine';
     osc.frequency.setValueAtTime(600, now);
     osc.frequency.exponentialRampToValueAtTime(200, now + 0.12);
-    gain.gain.setValueAtTime(0.1, now);
+    gain.gain.setValueAtTime(0.22 * volumeMultiplier, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
@@ -200,6 +204,22 @@ function refreshBoardIcons() {
 function updateSoundUI() {
   soundLabel.textContent = soundOn ? '🔊' : '🔇';
   soundToggleBtn.setAttribute('aria-label', soundOn ? 'Sound On' : 'Sound Off');
+}
+
+function updateVolumeUI() {
+  volumeSlider.value = volume;
+  volumeValue.textContent = `${volume}%`;
+}
+
+function handleVolumeChange(event) {
+  volume = parseInt(event.target.value);
+  localStorage.setItem('nebulaVolume', volume);
+  updateVolumeUI();
+  
+  // Play a preview sound when adjusting volume
+  if (soundOn) {
+    playSynthesizedSound('moveX');
+  }
 }
 
 function toggleSound() {
@@ -313,12 +333,14 @@ populateSymbolSelects();
 updateSymbolLabels();
 updateScoreDisplay();
 updateSoundUI();
+updateVolumeUI();
 
 // --- Listeners ---
 cells.forEach(cell => cell.addEventListener('click', handleCellClick));
 resetButton.addEventListener('click', resetGame);
 clearScoreButton.addEventListener('click', clearScore);
 soundToggleBtn.addEventListener('click', toggleSound);
+volumeSlider.addEventListener('input', handleVolumeChange);
 
 symbolXSelect.addEventListener('change', handleSymbolChange);
 symbolOSelect.addEventListener('change', handleSymbolChange);

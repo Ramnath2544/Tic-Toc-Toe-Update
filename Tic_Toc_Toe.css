@@ -216,12 +216,19 @@ body {
 .score-draws .value { color: #ffd166; text-shadow: 0 0 8px rgba(255, 209, 102, 0.5); }
 .score-o .value { color: var(--neon-magenta); text-shadow: 0 0 8px rgba(255, 0, 127, 0.5); }
 
+.sound-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
 .sound-toggle {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 16px;
   width: 48px;
-  height: 52px;
+  height: 48px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -233,6 +240,74 @@ body {
 .sound-toggle:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.volume-icon {
+  font-size: 16px;
+  user-select: none;
+}
+
+.volume-value {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--neon-cyan);
+  min-width: 36px;
+  text-align: right;
+  letter-spacing: 0.5px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.9);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 12px rgba(0, 243, 255, 0.9);
 }
 
 /* --- Turn Status --- */

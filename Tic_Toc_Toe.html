@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nebula Match: Cosmic Tic-Tac-Toe</title>
-  <link rel="stylesheet" href="Tic-Toc-Toe.css">
+  <link rel="stylesheet" href="Tic_Toc_Toe.css">
 </head>
 <body>
   <!-- Ambient Space Backgrounds -->
@@ -31,7 +31,7 @@
       </div>
     </div>
 
-    <!-- Top Bar with Scores & Sound Toggle -->
+    <!-- Top Bar with Scores & Sound Controls -->
     <div class="top-bar">
       <div class="score-board">
         <div class="score-card score-x">
@@ -48,9 +48,16 @@
         </div>
       </div>
       
-      <button class="sound-toggle js-sound-toggle" aria-label="Toggle Sound">
-        <span class="js-sound-label">🔊</span>
-      </button>
+      <div class="sound-controls">
+        <button class="sound-toggle js-sound-toggle" aria-label="Toggle Sound">
+          <span class="js-sound-label">🔊</span>
+        </button>
+        <div class="volume-control">
+          <span class="volume-icon">🔉</span>
+          <input type="range" min="0" max="100" value="70" class="volume-slider js-volume-slider" aria-label="Volume Control">
+          <span class="volume-value js-volume-value">70%</span>
+        </div>
+      </div>
     </div>
 
     <!-- Turn & Victory Status -->
@@ -76,6 +83,6 @@
     </div>
   </main>
 
-  <script src="Tic-Toc-Toe.js"></script>
+  <script src="Tic_Toc_Toe.js"></script>
 </body>
 </html>
