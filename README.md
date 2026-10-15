@@ -309,9 +309,7 @@ copies or substantial portions of the Software.
 
 Have questions or suggestions? Feel free to reach out!
 
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Email**: your.email@example.com
-- **Twitter**: [@yourusername](https://twitter.com/yourusername)
+- **Email**: ramnath2544@gmail.com
 
 ---
 
